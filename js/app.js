@@ -24,6 +24,13 @@ angular
     $scope.new_todo = "";
     };
 
+    $scope.enter_saves = function( $event ){
+      if( $event.keyCode == 13){
+        //enter keycode for [enter key]
+        $scope.save_todo( $scope.new_todo );
+      }
+    };
+
 
   
   }]);
