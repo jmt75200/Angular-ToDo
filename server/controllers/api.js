@@ -19,10 +19,10 @@ router.post('/', function (req, res) {
 });
 //delete todo
 router.delete('/:id', function (req, res) {
-  Todo.remove({ _id : req.params.id }, function (err, todo) {
+  Todo.remove({ _id : req.params.id }, function (err, num_removed, result) {
     if(err) throw err;
     //this is the todo that was removed
-    res.json( todo ); 
+    res.json( result ); 
   });
 });
 
@@ -33,24 +33,24 @@ router.put('/:id/complete', function (req, res) {
       $set : { 
         completed : true
       }
-    }, function (err, todo) {
+    }, function (err, update_count, result) {
       if(err) throw err;
       //this is the todo that was updated
-      res.json( todo ); 
+      res.json( result ); 
     });
 });
 
-//uncomplete todo
+//incomplete todo
 router.put('/:id/incomplete', function (req, res) {
   Todo.update({ _id: req.params.id}, 
     { 
       $set : { 
         completed : false
       }
-    }, function (err, todo) {
+    }, function (err, update_count, result) {
       if(err) throw err;
       //this is the todo that was updated
-      res.json( todo ); 
+      res.json( result ); 
     });
 });
 
