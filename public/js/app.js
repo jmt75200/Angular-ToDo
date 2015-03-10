@@ -19,15 +19,19 @@ angular
 
 
     $scope.save_todo = function( new_title ){
-      $scope.todos.push({
+      var new_todo = {
         title : new_title,
         completed : false
-      });
+      };
+      $scope.todos.push(new_todo);
+
       //clearing new input
       $scope.new_todo = "";
 
       //save to db
-      TodoService.create({ title : new_title });
+      TodoService.create({ title : new_title }).then(function (response) {
+        new_todo.id = response.data._id;
+      });
     };
 
     $scope.enter_saves = function( $event ){
