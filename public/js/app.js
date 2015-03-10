@@ -23,8 +23,11 @@ angular
         title : new_title,
         completed : false
       });
-    //clearing new input
-    $scope.new_todo = "";
+      //clearing new input
+      $scope.new_todo = "";
+
+      //save to db
+      TodoService.create({ title : new_title });
     };
 
     $scope.enter_saves = function( $event ){
@@ -33,5 +36,15 @@ angular
         $scope.save_todo( $scope.new_todo );
       }
     };
+
+    $scope.check_changed = function ( $event, todo_id ) {
+
+      if ($event.srcElement.checked){
+        TodoService.complete(todo_id);
+      }else{
+        TodoService.incomplete(todo_id);
+      }
+    };
+
 
   }]);
