@@ -11,9 +11,12 @@ angular
   .module('TodoApp', [])
 
   // dependencies injection ------v------------------v
-  .controller('TodoController', ['$scope', function($scope){
+  .controller('TodoController', ['$scope', 'TodoService', function($scope, TodoService){
 
-    $scope.todos = [];
+    TodoService.list().then(function (response) {
+      $scope.todos = response.data; //promise
+    });
+
 
     $scope.save_todo = function( new_title ){
       $scope.todos.push({
@@ -31,6 +34,4 @@ angular
       }
     };
 
-
-  
   }]);
